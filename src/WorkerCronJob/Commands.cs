@@ -1,12 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.CommandLine;
 using System.CommandLine.Invocation;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace WorkerCronJob
 {
@@ -42,7 +40,7 @@ namespace WorkerCronJob
 
             await host.StartAsync();
 
-            var scope = host.Services.CreateScope();
+            using var scope = host.Services.CreateScope();
             var appLifeTime = scope.ServiceProvider.GetRequiredService<IHostApplicationLifetime>();
 
             await Task.Delay(TimeSpan.FromSeconds(10));

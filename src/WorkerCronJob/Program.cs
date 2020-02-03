@@ -1,5 +1,3 @@
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using System;
 using System.CommandLine;
 using System.CommandLine.Builder;
@@ -8,9 +6,12 @@ using System.CommandLine.Rendering;
 using System.Reflection;
 using System.Threading.Tasks;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
 namespace WorkerCronJob
 {
-    public class Program
+    public sealed class Program
     {
         public static async Task<int> Main(string[] args)
         {
@@ -58,7 +59,6 @@ namespace WorkerCronJob
 
         private static void HandleException(Exception exception, InvocationContext context)
         {
-
             if (exception is OperationCanceledException)
             {
                 context.Console.Error.WriteLine("operation canceled.");
